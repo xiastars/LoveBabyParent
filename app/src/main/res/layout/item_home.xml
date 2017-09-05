@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:layout_marginTop="5dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <com.summer.helper.view.RoundAngleImageView
+        android:id="@+id/iv_nav"
+        android:layout_width="105dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/size_20"
+        android:background="@color/grey_e1"
+        android:scaleType="centerCrop"
+        app:corner_radius="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/iv_nav"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:focusable="false"
+            android:gravity="top|left"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_26"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dip"
+            android:ellipsize="end"
+            android:focusable="false"
+            android:singleLine="true"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/tv_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="80dp"
+            android:ellipsize="end"
+            android:focusable="false"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/grey_99"
+            android:textSize="@dimen/text_24" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_join"
+            android:layout_alignParentRight="true"
+            android:ellipsize="end"
+            android:textColor="@color/grey_99"
+            android:textSize="@dimen/text_24" />
+    </RelativeLayout>
+
+</LinearLayout>
