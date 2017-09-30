@@ -163,7 +163,11 @@ public class NRecycleView extends RecyclerView {
 
 
     public void showEmptyView(String content) {
+<<<<<<< HEAD
+        Adapter adapter = this.getAdapter();
+=======
         RecyclerView.Adapter adapter = this.getAdapter();
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         if (adapter != null) {
             if (emptyView == null) {
                 emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null);
@@ -342,8 +346,13 @@ public class NRecycleView extends RecyclerView {
         this.flTime = flTime;
         this.movieTimeMaps = movieTimeMaps;
         createTimeLine();
+<<<<<<< HEAD
+        final int layoutWidth = SUtils.getDip(context, 75);
+        this.addOnScrollListener(new OnScrollListener() {
+=======
         final int layoutWidth = SUtils.getDip(context, 55);
         this.addOnScrollListener(new RecyclerView.OnScrollListener() {
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
             @Override
             public void onScrolled(RecyclerView nvContainerView, int dx, int dy) {
                 super.onScrolled(nvContainerView, dx, dy);
@@ -465,7 +474,11 @@ public class NRecycleView extends RecyclerView {
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
             tvYear.setLayoutParams(params);
             params.leftMargin = SUtils.getDip(context, 85) * key + key * SUtils.getDip(context, 10) + dip10 / 2;
+<<<<<<< HEAD
+            params.width = SUtils.getDip(context, 75);
+=======
             params.width = SUtils.getDip(context, 55);
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         }
     }
 

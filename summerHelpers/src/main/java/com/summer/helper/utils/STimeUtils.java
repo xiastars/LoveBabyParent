@@ -35,6 +35,45 @@ public class STimeUtils {
     }
 
     /**
+     * 获取上一个月
+     *
+     * @return
+     */
+    public static int[] getPreMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        return getYearAndMonth(calendar);
+    }
+
+    private static int[] getYearAndMonth(Calendar calendar){
+        int[] datas = new int[2];
+        datas[0] = calendar.get(Calendar.YEAR);
+        datas[1] = calendar.get(Calendar.MONTH);
+        return datas;
+    }
+
+    /**
+     * 获取下一个月
+     *
+     * @return
+     */
+    public static int[] getNextMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, 1);
+        return getYearAndMonth(calendar);
+    }
+
+    /**
+     * 获取下一个月
+     *
+     * @return
+     */
+    public static int[] getCurYearAndMonth() {
+        Calendar calendar = Calendar.getInstance();
+        return getYearAndMonth(calendar);
+    }
+
+    /**
      * 转换时间，格式--
      *
      * @return

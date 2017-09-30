@@ -147,7 +147,7 @@ public class SUtils {
      * @param text
      */
     public static void setNotEmptText(TextView view, String text) {
-        if(view == null){
+        if (view == null) {
             return;
         }
         if (!TextUtils.isEmpty(text)) {
@@ -364,6 +364,28 @@ public class SUtils {
 
     /**
      * 获取一个View的左外边距
+<<<<<<< HEAD
+     *
+     * @param view
+     * @return
+     */
+    public static int getViewLeMargin(View view) {
+        ViewGroup parent = (ViewGroup) view.getParent();
+        if (parent != null) {
+            if (parent instanceof RelativeLayout) {
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                if (params != null) {
+                    return params.leftMargin;
+                }
+            } else if (parent instanceof LinearLayout) {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+                if (params != null) {
+                    return params.leftMargin;
+                }
+            } else if (parent instanceof FrameLayout) {
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+                if (params != null) {
+=======
      * @param view
      * @return
      */
@@ -383,6 +405,7 @@ public class SUtils {
             }else if(parent instanceof FrameLayout){
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
                 if(params != null){
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                     return params.leftMargin;
                 }
             }
@@ -479,16 +502,9 @@ public class SUtils {
         if (connectivity == null) {
             return false;
         } else {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-            }
+            NetworkInfo networkInfo = connectivity.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
         }
-        return false;
     }
 
     /**
@@ -512,11 +528,11 @@ public class SUtils {
             return "";
         String htmlStr = inputString; // 含html标签的字符串
         String textStr = "";
-        java.util.regex.Pattern p_script;
+        Pattern p_script;
         java.util.regex.Matcher m_script;
-        java.util.regex.Pattern p_style;
+        Pattern p_style;
         java.util.regex.Matcher m_style;
-        java.util.regex.Pattern p_html;
+        Pattern p_html;
         java.util.regex.Matcher m_html;
         try {
             String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // 定义script的正则表达式{或<script[^>]*?>[\\s\\S]*?<\\/script>
@@ -628,7 +644,11 @@ public class SUtils {
      * @return
      */
     public static String getDayWithFormat(String formatContent, long date) {
+<<<<<<< HEAD
+        return getDayWithFormat(formatContent, new Date(date));
+=======
         return getDayWithFormat(formatContent,new Date(date));
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
     }
 
     /**
@@ -838,10 +858,10 @@ public class SUtils {
     public static String getSDPath() {
         File sdDir = null;
         try {
-            boolean sdCardExist = android.os.Environment.getExternalStorageState()
-                    .equals(android.os.Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
+            boolean sdCardExist = Environment.getExternalStorageState()
+                    .equals(Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
             if (sdCardExist) {
-                sdDir = android.os.Environment.getExternalStorageDirectory();// 获取跟目录
+                sdDir = Environment.getExternalStorageDirectory();// 获取跟目录
             } else {
                 File file = new File(Environment.getDataDirectory() + "/sdcard");
                 if (file.canRead()) {
@@ -1412,6 +1432,19 @@ public class SUtils {
         setPic(view, img, 0, holder, false);
     }
 
+    /**
+     * 设置图片，使用自定义Holder
+     *
+     * @param view
+     * @param img
+     */
+    public static void setPicWithHolder(ImageView view, String img, int size, int holder) {
+        if (!TextUtils.isEmpty(img) && img.length() > 5) {
+            img += "?x-oss-process=image/resize,m_mfit,h_"+size+",w_"+size;
+        }
+        setPic(view, img, 0, holder, false);
+    }
+
     public static void setPicWithHolder(ImageView view, String img, int holder, boolean download) {
         setPic(view, img, 0, holder, false);
     }
@@ -1432,18 +1465,42 @@ public class SUtils {
         setPic(view, img, width, height, holder, false, null);
     }
 
+    /**
+     * 设置本地资源图片
+     *
+     * @param view
+     * @param holder
+     */
+    public static void setPicResource(ImageView view, int holder) {
+        setPic(view, null, 0, 0, holder, false, null);
+    }
+
+    /**
+     * 仅仅返回图片的bitmap
+     *
+     * @param context
+     * @param img
+     * @param target
+     */
+    public static void getPicBitmap(Context context, String img, SimpleTarget target) {
+        if (img.startsWith("//")) {
+            img = PostData.OOSHEAD + ":" + img;
+        }
+        Glide.with(context).load(img).into(target);
+    }
+
     public static void setPic(final ImageView view, String img, int width, int height, int holder, boolean download, SimpleTarget target) {
-        String localpath = setPicCheckUrl(img,view,holder);
-        if(localpath == null){
+        String localpath = setPicCheckUrl(img, view, holder);
+        if (localpath == null) {
             return;
         }
         try {
             if (width == 0) {
                 if (localpath.startsWith("http")) {
                     if (target == null) {
-                        try{
+                        try {
                             Glide.with(view.getContext()).load(localpath).placeholder(holder).crossFade().dontAnimate().into(view);
-                        }catch (OutOfMemoryError e){
+                        } catch (OutOfMemoryError e) {
                             e.printStackTrace();
                         }
                     } else {
@@ -1490,17 +1547,19 @@ public class SUtils {
 
     /**
      * 设置圆角图片
+     *
      * @param view
      * @param img
      * @param round
      * @param holder
      */
     public static void setRoundPic(final ImageView view, String img, int round, int holder) {
-        setRoundPic(view,img,round,holder,null);
+        setRoundPic(view, img, round, holder, null);
     }
 
     /**
      * 设置圆角图片
+     *
      * @param view
      * @param img
      * @param round
@@ -1508,16 +1567,16 @@ public class SUtils {
      * @param target
      */
     public static void setRoundPic(final ImageView view, String img, int round, int holder, SimpleTarget target) {
-        String localpath = setPicCheckUrl(img,view,holder);
-        if(localpath == null){
+        String localpath = setPicCheckUrl(img, view, holder);
+        if (localpath == null) {
             return;
         }
         try {
             BitmapTransformation transformation;
-            if(round == 45){
+            if (round == 45) {
                 transformation = new GlideCircleTransform(view.getContext());
-            }else{
-                transformation = new GlideRoundTransform(view.getContext(),round);
+            } else {
+                transformation = new GlideRoundTransform(view.getContext(), round);
             }
             if (localpath.startsWith("http")) {
                 if (target == null) {
@@ -1541,7 +1600,7 @@ public class SUtils {
 
     }
 
-    private static String setPicCheckUrl(String img,ImageView view,int holder){
+    private static String setPicCheckUrl(String img, ImageView view, int holder) {
         if (null == view)
             return null;
         if (TextUtils.isEmpty(img) || img.length() < 5) {
@@ -1550,7 +1609,11 @@ public class SUtils {
                 if (holder == 0) {
                     view.setImageResource(R.drawable.so_greye1_pure);
                 } else {
+<<<<<<< HEAD
+                    BitmapUtils.getInstance().checkContainBitmaps(view, context.getClass().getSimpleName(), holder);
+=======
                     BitmapUtils.getInstance().checkContainBitmaps(view,context.getClass().getSimpleName(),holder);
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                 }
             } catch (OutOfMemoryError e) {
                 e.printStackTrace();
@@ -1558,13 +1621,13 @@ public class SUtils {
             return null;
         }
         if (img.startsWith("//")) {
-            img = PostData.OOSHEAD + ":" + img;
+            img = STextUtils.spliceText(PostData.OOSHEAD,":",img);
         }
         return img;
     }
 
     public static Bitmap decodeBackgoundBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
+        final Options options = new Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(res, resId, options);
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
@@ -1572,7 +1635,7 @@ public class SUtils {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    public static int calculateInSampleSize(Options options, int reqWidth, int reqHeight) {
         final int width = options.outWidth;
         final int height = options.outHeight;
         int inSampleSize = 1;
@@ -1702,7 +1765,7 @@ public class SUtils {
                 @Override
                 public void onError(DownloadTask downloadTask, int errorCode) {
                     Logs.i("errorCode:" + errorCode);
-                    if(file.exists()){
+                    if (file.exists()) {
                         file.delete();
                     }
                 }

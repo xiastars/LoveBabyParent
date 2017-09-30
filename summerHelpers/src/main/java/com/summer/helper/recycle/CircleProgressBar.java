@@ -365,18 +365,19 @@ public class CircleProgressBar extends ImageView implements MaterialHeadListener
 
     @Override
     public void setVisibility(int visibility) {
+
+        if (mProgressDrawable != null) {
+            mProgressDrawable.setVisible(visibility == VISIBLE, false);
+            if (visibility != VISIBLE) {
+                mProgressDrawable.stop();
+            } else {
+                if (mProgressDrawable.isRunning()) {
+                    mProgressDrawable.stop();
+                }
+                mProgressDrawable.start();
+            }
+        }
         super.setVisibility(visibility);
-//        if (mProgressDrawable != null) {
-//            mProgressDrawable.setVisible(visibility == VISIBLE, false);
-//            if (visibility != VISIBLE) {
-//                mProgressDrawable.stop();
-//            } else {
-//                if (mProgressDrawable.isRunning()) {
-//                    mProgressDrawable.stop();
-//                }
-//                mProgressDrawable.start();
-//            }
-//        }
     }
 
     @Override

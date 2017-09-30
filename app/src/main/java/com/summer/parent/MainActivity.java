@@ -1,28 +1,16 @@
 package com.summer.parent;
 
-import com.summer.helper.utils.Logs;
+import com.summer.helper.view.SRecycleView;
 import com.summer.parent.adapter.MovementAdapter;
 import com.summer.parent.base.BaseActivity;
-import com.summer.parent.bean.HomeBean;
 import com.summer.parent.bean.MovementInfo;
-import com.summer.parent.server.Const;
-import com.summer.parent.server.Server;
-import com.summer.helper.server.SummerParameter;
-import com.summer.helper.view.SRecycleView;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
-import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobRealTimeData;
-import cn.bmob.v3.listener.FindCallback;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.ValueEventListener;
 
-public class MainActivity extends BaseActivity implements ValueEventListener {
+public class MainActivity extends BaseActivity {
     MovementAdapter movementAdapter;
 
     @Override
@@ -51,8 +39,6 @@ public class MainActivity extends BaseActivity implements ValueEventListener {
         movementAdapter = new MovementAdapter(context);
         svContainer.setAdapter(movementAdapter);
         loadData();
-        BmobRealTimeData rtd = new BmobRealTimeData();
-        rtd.start(context, this);
     }
 
     @Override
@@ -71,17 +57,5 @@ public class MainActivity extends BaseActivity implements ValueEventListener {
         });
 
 
-
-    }
-
-
-    @Override
-    public void onConnectCompleted() {
-        Logs.i("连接成功:");
-    }
-
-    @Override
-    public void onDataChange(JSONObject jsonObject) {
-        Logs.i("(" + jsonObject.optString("action") + ")" + "数据：" + jsonObject);
     }
 }

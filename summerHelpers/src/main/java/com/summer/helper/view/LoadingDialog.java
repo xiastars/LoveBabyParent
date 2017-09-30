@@ -73,6 +73,7 @@ public class LoadingDialog {
     }
 
     public void startLoading() {
+        cancelLoading();
         indexCount = 0;
         loadingWord = "加载中";
         show();
@@ -85,12 +86,10 @@ public class LoadingDialog {
     }
 
     private void show(){
-        Logs.i("dialog::::"+dialog);
         rlLoading.setVisibility(View.VISIBLE);
         if (dialog != null) {
             try {
                 Activity activity = (Activity) context;
-                Logs.i("activity:::"+activity+",,,,"+activity.isFinishing());
                 if(activity.isFinishing()){
                     return;
                 }

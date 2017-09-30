@@ -10,6 +10,7 @@ import com.summer.helper.utils.PostData;
 import com.summer.helper.utils.SFileUtils;
 import com.summer.helper.utils.SUtils;
 
+import cn.bmob.sms.BmobSMS;
 import cn.bmob.v3.Bmob;
 
 /**
@@ -18,6 +19,7 @@ import cn.bmob.v3.Bmob;
 public class MyApplication extends Application {
     static Context context;
     public static final boolean DEBUGMODE = false;
+    private static final String APP_KEY = "";
 
     @Override
     public void onCreate() {
@@ -26,7 +28,8 @@ public class MyApplication extends Application {
         Logs.isDebug = true;
         SUtils.setContext(context);
         SFileUtils.initCache(context);
-        Bmob.initialize(context,"");
+        Bmob.initialize(context, APP_KEY);
+        BmobSMS.initialize(context, APP_KEY);
         try {
             ApplicationInfo appInfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
             if (appInfo.metaData != null) {

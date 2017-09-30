@@ -2,7 +2,6 @@ package com.summer.helper.server;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Handler;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -14,12 +13,12 @@ import com.summer.helper.listener.OnResponseListener;
 import com.summer.helper.utils.Logs;
 import com.summer.helper.utils.PostData;
 import com.summer.helper.utils.SFileUtils;
+import com.summer.helper.utils.STextUtils;
 import com.summer.helper.utils.SThread;
 import com.summer.helper.utils.SUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,21 +27,18 @@ import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.net.SocketTimeoutException;
 import java.security.KeyStore;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -55,6 +51,28 @@ public final class EasyHttp {
 
     public static final String METHOD = "POST";
     public static final String METHOD_GET = "GET";
+    static OkHttpClient okHttpClient;
+    static OkHttpClient.Builder mBuilder;
+
+    public static void init(Context context) {
+        if (okHttpClient == null) {
+            mBuilder = new OkHttpClient.Builder()
+                    .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                    .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                    .writeTimeout(10000L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(false)
+                    .hostnameVerifier(new HostnameVerifier() {
+                        @Override
+                        public boolean verify(String hostname, SSLSession session) {
+                            return true;
+                        }
+                    });
+            okHttpClient = mBuilder.build();
+            //设置最大并发量
+            okHttpClient.dispatcher().setMaxRequestsPerHost(10);
+            //其他配置
+            OkHttpUtils.getInstance(okHttpClient);
+        }
+    }
 
     public static void init(){
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -130,21 +148,27 @@ public final class EasyHttp {
     }
 
     private static <T> void requestPost(final Context context, String url, final Class<T> clazz, final SummerParameter parameters, final RequestCallback<T> callBack, String methodGet) {
-
-        OkHttpClient okHttpClient = setCoockies(context);
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-
         Set<String> params = parameters.keySet();
         String logInfo = "";
-
         Request.Builder formBody = new Request.Builder().url(url);
         for (String key : params) {
             if (key.equals("login")) {
                 SummerParameter pa = PostData.getLoginParameters(context);
                 Set<String> postdate = pa.keySet();
                 for (String postKey : postdate) {
+<<<<<<< HEAD
+
+                    if (!TextUtils.isEmpty(postKey)) {
+                        String value = pa.get(postKey) + "";
+                        if (STextUtils.isChineseStr(value)) {
+                            value = STextUtils.getPinYin(value);
+                        }
+                        formBody.addHeader(postKey, value + "");
+=======
                     if(!TextUtils.isEmpty(postKey)){
                         formBody.addHeader(postKey, pa.get(postKey) + "");
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                     }
                 }
             } else {
@@ -162,9 +186,13 @@ public final class EasyHttp {
             parameters.encodeUrlAndLog(url);
         }
         formBody.post(requestBody.build()).header("Content-Type", "application/x-www-form-urlencoded")
+<<<<<<< HEAD
+                .header("User-Agent", PostData.getUserAgent());
+=======
                 .header("User-Agent",PostData.getUserAgent());
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         final String finalLogInfo = logInfo;
-        try{
+        try {
             okHttpClient.newCall(formBody.build()).enqueue(new Callback() {
 
                 @Override
@@ -176,7 +204,11 @@ public final class EasyHttp {
                     }
                     final String response = body.string();
 
+<<<<<<< HEAD
+                    SThread.getIntances().runOnUIThreadIfNeed(context, new Runnable() {
+=======
                     SThread.getIntances().runOnUIThreadIfNeed(context,new Runnable() {
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                         @Override
                         public void run() {
                             try {
@@ -193,6 +225,7 @@ public final class EasyHttp {
                                     callBack.done(t);
                                 }
                             } catch (Exception e) {
+                                Logs.i("e:::" + e.toString());
                                 if (callBack != null) {
                                     callBack.onError(ErrorCode.INVALID_JSON, "无效的数据格式");
                                 }
@@ -204,8 +237,13 @@ public final class EasyHttp {
                 }
 
                 @Override
+<<<<<<< HEAD
+                public void onFailure(final Call arg0, final IOException arg1) {
+                    SThread.getIntances().runOnUIThreadIfNeed(context, new Runnable() {
+=======
                 public void onFailure(Call arg0, final IOException arg1) {
                     SThread.getIntances().runOnUIThreadIfNeed(context,new Runnable() {
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                         @Override
                         public void run() {
                             if (arg1 instanceof SocketTimeoutException) {
@@ -214,7 +252,7 @@ public final class EasyHttp {
                                 }
                             } else {
                                 if (callBack != null) {
-                                    callBack.onError(ErrorCode.ERR_OTHER, "其它错误");
+                                    callBack.onError(ErrorCode.ERR_OTHER, "其它错误" + arg1.getMessage() + ",,," + arg0.toString());
                                 }
                                 if (Logs.isDebug) {
                                     //SUtils.makeToast(context, "请求失败,请稍后重试!");
@@ -224,8 +262,8 @@ public final class EasyHttp {
                     });
                 }
             });
-        }catch (OutOfMemoryError e){
-            callBack.onError(ErrorCode.ERR_LOWMEMORY,"内存不足");
+        } catch (OutOfMemoryError e) {
+            callBack.onError(ErrorCode.ERR_LOWMEMORY, "内存不足");
             e.printStackTrace();
         }
     }
@@ -259,7 +297,11 @@ public final class EasyHttp {
             parameters.encodeUrlAndLog(url);
         }
         final String finalLogInfo = logInfo;
+<<<<<<< HEAD
+        utils.addHeader("User-Agent", PostData.getUserAgent());
+=======
         utils.addHeader("User-Agent",PostData.getUserAgent());
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         utils.build().execute(new StringCallback() {
             @Override
             public void onResponse(String response) {
@@ -284,19 +326,21 @@ public final class EasyHttp {
             public void onError(Call arg0, Exception arg1) {
                 if (arg1 instanceof SocketTimeoutException) {
                     if (Logs.isDebug) {
-                        SUtils.makeToast(context, "请求超时");
+                        // SUtils.makeToast(context, "请求超时");
                     }
                     callBack.onError(ErrorCode.ERR_TIMEOUT, "请求超时");
                 } else {
-                    callBack.onError(ErrorCode.ERR_OTHER, "请求错误");
+                    callBack.onError(ErrorCode.ERR_OTHER, "请求错误" + arg1);
                     if (Logs.isDebug) {
-                        SUtils.makeToast(context, "请求失败,请稍后重试!");
+                        //SUtils.makeToast(context, "请求失败,请稍后重试!");
                     }
                 }
             }
         });
     }
 
+<<<<<<< HEAD
+=======
     private static OkHttpClient setCoockies(final Context context) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .cookieJar(new CookieJar() {
@@ -348,6 +392,7 @@ public final class EasyHttp {
         return okHttpClient;
     }
 
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
     /**
      * 上传文件
      *
@@ -359,7 +404,7 @@ public final class EasyHttp {
      */
     public static void upLoadFile(Context context, String fileDirectory, String fileType, String filePath, final OnResponseListener listener) {
         try {
-            OkHttpClient okHttpClient = setCoockies(context);
+            //setCoockies(context);
             MultipartBody.Builder builder = new MultipartBody.Builder();
             final String key = fileDirectory + "/" + System.nanoTime() + fileType;
             builder.addFormDataPart("key", key);
@@ -379,7 +424,7 @@ public final class EasyHttp {
                 sendDatas = SUtils.getBitmapArrays(lastBitmap);
             }
             if (sendDatas != null) {
-                builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("application/octet-stream"), sendDatas));
+                builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("image/png"), sendDatas));
             }
             //创建RequestBody
             RequestBody body = builder.build();
@@ -398,7 +443,7 @@ public final class EasyHttp {
             }
             X509TrustManager trustManager = (X509TrustManager) trustManagers[0];
 
-            final Call call = okHttpClient.newBuilder().sslSocketFactory(new TLSSocketFactory(), trustManager)
+            final Call call = mBuilder.sslSocketFactory(new TLSSocketFactory(), trustManager)
                     .writeTimeout(50, TimeUnit.SECONDS)
                     .readTimeout(50, TimeUnit.SECONDS)
                     .build().newCall(request);

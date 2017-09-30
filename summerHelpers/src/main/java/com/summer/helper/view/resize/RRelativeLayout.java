@@ -35,12 +35,12 @@ public class RRelativeLayout extends RelativeLayout {
         if (height != 0) {
             params.height = SUtils.getSHeight((Activity) getContext(),height);
         }
-        if (params instanceof RelativeLayout.LayoutParams) {
+        if (params instanceof LayoutParams) {
             if (marginLeft != 0) {
-                ((RelativeLayout.LayoutParams) params).leftMargin = SUtils.getSWidth((Activity) getContext(),marginLeft);
+                ((LayoutParams) params).leftMargin = SUtils.getSWidth((Activity) getContext(),marginLeft);
             }
             if (marginTop != 0) {
-                ((RelativeLayout.LayoutParams) params).topMargin =  SUtils.getSHeight((Activity) getContext(),marginTop);
+                ((LayoutParams) params).topMargin =  SUtils.getSHeight((Activity) getContext(),marginTop);
             }
         } else if (params instanceof LinearLayout.LayoutParams) {
             if (marginLeft != 0) {

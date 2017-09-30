@@ -42,12 +42,12 @@ public class RLinearLayout extends LinearLayout {
             if (marginTop != 0) {
                 ((RelativeLayout.LayoutParams) params).topMargin =  SUtils.getSHeight((Activity) getContext(),marginTop);
             }
-        } else if (params instanceof LinearLayout.LayoutParams) {
+        } else if (params instanceof LayoutParams) {
             if (marginLeft != 0) {
-                ((LinearLayout.LayoutParams) params).leftMargin = SUtils.getSWidth((Activity) getContext(),marginLeft);
+                ((LayoutParams) params).leftMargin = SUtils.getSWidth((Activity) getContext(),marginLeft);
             }
             if (marginTop != 0) {
-                ((LinearLayout.LayoutParams) params).topMargin = SUtils.getSHeight((Activity) getContext(),marginTop);
+                ((LayoutParams) params).topMargin = SUtils.getSHeight((Activity) getContext(),marginTop);
             }
         } else if (params instanceof FrameLayout.LayoutParams) {
             if (marginLeft != 0) {

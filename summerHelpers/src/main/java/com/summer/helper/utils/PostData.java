@@ -3,6 +3,11 @@ package com.summer.helper.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+<<<<<<< HEAD
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -22,13 +27,13 @@ import java.io.LineNumberReader;
 public class PostData {
 
     // 手机品牌
-    public static String MANUFACTURER = android.os.Build.MANUFACTURER;
+    public static String MANUFACTURER = Build.MANUFACTURER;
     // 手机型号
-    public static String MODEL = android.os.Build.MODEL;
+    public static String MODEL = Build.MODEL;
     // 操作系统
     public static String OS = "Android";
     // 操作系统版本号
-    public static String VERSION_OS = android.os.Build.VERSION.SDK;
+    public static String VERSION_OS = Build.VERSION.SDK;
     // 手机唯一标识码
     public static String IMEI = "";
     // 项目版本号：
@@ -52,16 +57,16 @@ public class PostData {
     public static String OOSHEAD = "http";
 
     //阿里云的KEY
-    public static String ALI_KEY ;
+    public static String ALI_KEY;
 
     //阿里云的上传地址
-    public static String ALI_URL ;
+    public static String ALI_URL;
 
     //阿里云的访问策略
-    public static String ALI_POLICY ;
+    public static String ALI_POLICY;
 
     //阿里云的上传签名
-    public static String ALI_SIGNATURE ;
+    public static String ALI_SIGNATURE;
 
     //访问阿里文件的位置
     public static String ALI_PRE;
@@ -82,19 +87,23 @@ public class PostData {
         params.put("os", OS + "_" + VERSION_OS);
         params.put("language", "cn");
         params.put("channel", CHANNEL);
+<<<<<<< HEAD
+        if (!TextUtils.isEmpty(USER_URL)) {
+            params.put("userUrl", USER_URL);
+=======
         if(!TextUtils.isEmpty(USER_URL)){
             params.put("userUrl",USER_URL);
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
             USER_URL = null;
         }
         if (MAC_INFO == null) {
             MAC_INFO = getMac();
         }
-        if (MAC_INFO != null) {
-            params.put("uniquecode",getMac());
-            params.put("mac", getMac());
-        }
-        params.put("idfa", "");
-
+        MAC_INFO = MAC_INFO == null ? "" : MAC_INFO;
+        PostData.IMEI = getIMIE(context);
+        String uniquecode = STextUtils.md5(getMac() + "_" + PostData.IMEI + "_hxq");
+        params.put("uniquecode", uniquecode);
+        params.put("mac", MAC_INFO);
         return params;
     }
 

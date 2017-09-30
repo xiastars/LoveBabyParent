@@ -60,7 +60,7 @@ public class ReceiverUtils {
 	}
 	
 	public interface ReceiverListener{
-		void doSomething(int position,Intent intent);
+		void doSomething(int position, Intent intent);
 	}
 
 }

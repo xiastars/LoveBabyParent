@@ -21,14 +21,18 @@ import java.util.List;
  * 当需要上拉加载时，底部添加加载完了
  */
 public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public Context context;
+    protected Context context;
     public List<?> items;
     protected int headerCount;
     protected int bottomCount = 1;
     boolean bottomVisible = false;
     protected boolean showEmptyView;
 
+<<<<<<< HEAD
+    protected ViewGroup headerView;
+=======
     ViewGroup headerView;
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 
     /**
      * 正在刷新中
@@ -78,7 +82,11 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
             boolean showBottom = getRealItemCount() == 0 && showEmptyView;
             if (bottomVisible) {
                 rlView.setVisibility(View.VISIBLE);
+<<<<<<< HEAD
+                params.height = showBottom ? SUtils.getDip(context, 300) : SUtils.getDip(context, 50);
+=======
                 params.height = showBottom ? SUtils.getDip(context, 300) : SUtils.getDip(context, 42);
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                 params.width = SUtils.screenWidth;
                 if(showBottom){
                     ((BottomHolder) holder).llEmpty.setVisibility(View.VISIBLE);
@@ -102,7 +110,6 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
      * @param position
      */
     protected void bindHeaderView(RecyclerView.ViewHolder holder, int position) {
-
     }
 
     @Override
@@ -146,13 +153,22 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
 
     public void notifyDataChanged(List<?> comments, boolean hideBottom) {
         this.items = comments;
+        Logs.i("Items::"+items);
+        showEmptyView = hideBottom;
         if (hideBottom && comments != null && !comments.isEmpty()) {
             setBottomViewGONE();
         } else {
             setBottomViewVisible();
         }
-        if (comments != null)
+        if (comments != null){
             notifyDataSetChanged();
+            notifyItemChanged(0);
+        }
+
+    }
+
+    public int getRealItemCount() {
+        return items != null ? items.size() : 0;
     }
 
     public int getRealItemCount() {
@@ -167,7 +183,7 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
         this.headerView = headerView;
     }
 
-    private class BottomHolder extends RecyclerView.ViewHolder {
+    protected class BottomHolder extends RecyclerView.ViewHolder {
 
         TextView tvNomore;
         RelativeLayout rlParent;
@@ -181,7 +197,7 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
         }
     }
 
-    private class TopHolder extends RecyclerView.ViewHolder {
+    protected class TopHolder extends RecyclerView.ViewHolder {
 
         public TopHolder(View itemView) {
             super(itemView);
@@ -195,7 +211,10 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
             return;
         }
         isAdapterRefresh = true;
+<<<<<<< HEAD
+=======
         Logs.i("xia", "没有更多了");
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         try {
             notifyItemChanged(getItemCount() - 1);
         } catch (ConcurrentModificationException e) {
@@ -212,12 +231,46 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
         this.showEmptyView = true;
     }
 
+<<<<<<< HEAD
+    public boolean isBottomVisible() {
+        return bottomVisible;
+    }
+
+    public void setBottomVisible(boolean bottomVisible) {
+        this.bottomVisible = bottomVisible;
+    }
+
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
     public void setBottomViewGONE() {
+        Logs.i("没有更多了");
         bottomVisible = false;
     }
 
     public void setHeaderCount(int count) {
         this.headerCount = count;
+    }
+
+    public int getHeaderCount(){
+        return this.headerCount;
+    }
+
+    /**
+     * 返回对应颜色
+     * @param colorRes
+     * @return
+     */
+    public int getResourceColor(int colorRes){
+        return context.getResources().getColor(colorRes);
+    }
+
+    /**
+     * 为文本设置颜色
+     * @param colorRes
+     * @return
+     */
+    protected void setHoderTextColor(TextView view, int colorRes){
+        view.setTextColor(getResourceColor(colorRes));
     }
 
     public class ViewType {

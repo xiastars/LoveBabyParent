@@ -1,4 +1,4 @@
-/*
+package com.summer.helper.view;/*
 package com.summer.helper.view;
 
 import android.content.Context;

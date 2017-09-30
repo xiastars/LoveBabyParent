@@ -327,7 +327,6 @@ public class MaterialRefreshLayout extends FrameLayout {
     }
 
     public void setAutoLoadmore() {
-        Logs.i("re:::"+refreshListener+",,,"+isLoadMore+",,,,"+isLoadMoreing);
         if (refreshListener != null && isLoadMore && !isLoadMoreing) {
             isLoadMoreing = true;
             refreshListener.onRefreshLoadMore(MaterialRefreshLayout.this);
@@ -573,7 +572,7 @@ public class MaterialRefreshLayout extends FrameLayout {
         this.isShowWave = isShowWave;
     }
 
-    protected void setIsOverLay(boolean isOverLay) {
+    public void setIsOverLay(boolean isOverLay) {
         this.isOverlay = isOverLay;
     }
 
@@ -718,13 +717,20 @@ public class MaterialRefreshLayout extends FrameLayout {
                 int count = adapter.getItemCount();
                 int addBottom = 0;
                 if (adapter instanceof SRecycleMoreAdapter) {
+                    SRecycleMoreAdapter sAdapter = (SRecycleMoreAdapter) adapter;
+                    //count = sAdapter.getItemCount() + (sAdapter.items == null ? 1 : 0);
                     addBottom = 1;
+                    int headCount = sAdapter.getHeaderCount();
+           /*         if (headCount > 0)
+                        addBottom += headCount;*/
                 }
+                Logs.i("显示空页面" + count + ",,," + addBottom);
                 if (count == addBottom) {
                     if (emptyView == null) {
                         emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null);
                         this.addView(emptyView);
                         setLoadMore(false);
+                        Logs.i("显示空页面");
                     }
                 } else {
                     if (emptyView != null) {

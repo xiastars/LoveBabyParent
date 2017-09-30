@@ -7,7 +7,11 @@
     <style name="Theme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/white</item>
         <!-- 初始状态栏颜色 -->
+<<<<<<< HEAD
+        <item name="colorPrimaryDark">@color/transparent</item>
+=======
         <item name="colorPrimaryDark">@color/red_d4</item>
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         <item name="android:calendarTextColor">@color/black</item>
         <item name="colorAccent">@color/green_4b</item>
         <item name="android:windowContentOverlay">@null</item>

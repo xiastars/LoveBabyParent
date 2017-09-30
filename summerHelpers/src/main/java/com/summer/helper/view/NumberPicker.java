@@ -148,7 +148,7 @@ public class NumberPicker extends LinearLayout {
 	 * 
 	 * @hide
 	 */
-	public static final NumberPicker.Formatter TWO_DIGIT_FORMATTER = new NumberPicker.Formatter() {
+	public static final Formatter TWO_DIGIT_FORMATTER = new Formatter() {
 		final StringBuilder mBuilder = new StringBuilder();
 
 		final java.util.Formatter mFmt = new java.util.Formatter(mBuilder,

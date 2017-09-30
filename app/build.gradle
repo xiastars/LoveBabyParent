@@ -26,8 +26,6 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':summerHelpers')
-    compile 'com.jakewharton:butterknife:8.6.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //3.4.7-aar：具务必查看下面注释[1]
     compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
 
@@ -43,4 +41,5 @@ dependencies {
 
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
     compile 'cn.bmob.android:http-legacy:1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

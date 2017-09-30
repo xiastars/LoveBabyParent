@@ -64,6 +64,7 @@ public abstract class BaseRequestActivity extends Activity {
         baseHelper = new BaseHelper(context, myHandlder);
         setContentView(R.layout.activity_base);
         initTitleView();
+        setLayoutFullscreen();
         checkView();
     }
 

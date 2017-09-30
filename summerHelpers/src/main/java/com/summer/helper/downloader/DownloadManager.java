@@ -26,7 +26,7 @@ public class DownloadManager {
     private int mPoolSize = 5;
     private ExecutorService executorService;
     private Map<String,Future> futureMap;
-    private okhttp3.OkHttpClient client;
+    private OkHttpClient client;
 
     public Map<String, DownloadTask> getCurrentTaskList() {
         return currentTaskList;

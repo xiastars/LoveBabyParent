@@ -65,6 +65,10 @@ public class BitmapUtils {
      * @param view
      * @param tag  tag为当前Activity的名称
      */
+<<<<<<< HEAD
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
     public void setPic(ImageView view, Bitmap bitmap, String tag) {
         try {
             if (!bitmap.isRecycled()) {
@@ -74,8 +78,29 @@ public class BitmapUtils {
             if (bits == null) {
                 bits = new ArrayList<>();
             }
+<<<<<<< HEAD
+            boolean isContain = false;
+            if (bits != null) {
+                Iterator iterator = bits.iterator();
+                while ((iterator.hasNext())) {
+                    Bitmap b = (Bitmap) iterator.next();
+                    if (bitmap != null && !b.isRecycled() && !bitmap.isRecycled() && bitmap.sameAs(b)) {
+                        bitmap.recycle();
+                        view.setImageBitmap(b);
+                        isContain = true;
+                        break;
+                    }
+                }
+            }
+            if (!isContain) {
+                bits.add(bitmap);
+                bitmaps.put(tag, bits);
+                view.setImageBitmap(bitmap);
+            }
+=======
             bits.add(bitmap);
             bitmaps.put(tag, bits);
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         } catch (OutOfMemoryError e) {
             e.printStackTrace();
         } catch (RuntimeException e) {
@@ -94,6 +119,10 @@ public class BitmapUtils {
 
     /**
      * 主要判断是不是同一个holder
+<<<<<<< HEAD
+     *
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
      * @param view
      * @param tag
      * @param holder
@@ -140,6 +169,10 @@ public class BitmapUtils {
         }
         bitmaps.remove(tag);
         Logs.i("清除内存:" + tag);
+    }
+
+    public void clearAll() {
+        bitmaps.clear();
     }
 
 }

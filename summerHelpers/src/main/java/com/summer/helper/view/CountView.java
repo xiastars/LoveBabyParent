@@ -48,7 +48,11 @@ public class CountView extends View {
         int height = getBottom() - getTop();
         int width = getRight() - getLeft();
         circlePaint.setColor(getContext().getResources().getColor(R.color.red_d4));
-        canvas.drawOval(0, 0, width, height, circlePaint);
+        try {
+            canvas.drawOval(0, 0, width, height, circlePaint);
+        }catch (NoSuchMethodError e){
+            e.printStackTrace();
+        }
         circlePaint.setColor(getContext().getResources().getColor(R.color.white));
         canvas.drawLine(width * 0.28f, width * 0.8f, width * 0.72f, width * 0.2f, circlePaint);
         float textSize = TypedValue.applyDimension(

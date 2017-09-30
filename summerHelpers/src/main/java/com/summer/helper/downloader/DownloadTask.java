@@ -145,18 +145,18 @@ public class DownloadTask implements Runnable {
         } catch (FileNotFoundException e) {
             downloadStatus = DownloadStatus.DOWNLOAD_STATUS_ERROR;
             onError(DownloadTaskListener.DOWNLOAD_ERROR_FILE_NOT_FOUND);
-            Logs.i("xia",e.toString());
+            Logs.i("下载错误"+e.toString());
             return;
 //            e.printStackTrace();
         } catch (IOException e) {
             downloadStatus = DownloadStatus.DOWNLOAD_STATUS_ERROR;
             onError(DownloadTaskListener.DOWNLOAD_ERROR_IO_ERROR);
-            Logs.i("xia",e.toString());
+            Logs.i("下载错误"+e.toString());
             return;
         } finally {
         	if(completedSize < toolSize){
                 onError(DownloadTaskListener.DOWNLOAD_ERROR_IO_ERROR);
-        		Logs.i("未知错误");
+        		Logs.i("未知错误"+completedSize+"toolSize:"+toolSize);
         	}else{
         	    if(dbEntity != null){
                     dbEntity.setCompletedSize(completedSize);
@@ -270,7 +270,7 @@ public class DownloadTask implements Runnable {
         this.downloadIndex = downloadIndex;
     }
 
-    public void setHttpClient(okhttp3.OkHttpClient client) {
+    public void setHttpClient(OkHttpClient client) {
         this.client = client;
     }
 

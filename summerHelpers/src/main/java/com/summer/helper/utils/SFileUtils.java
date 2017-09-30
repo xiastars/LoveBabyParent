@@ -14,6 +14,10 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+<<<<<<< HEAD
+import java.io.OutputStream;
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 
 /**
  * 处理数据相关
@@ -36,7 +40,7 @@ public class SFileUtils {
     /**
      * 背景图根目录
      */
-    public static String ROOT_BACKGROUND = SOURCE_PATH + ".pics/";
+    public static String ROOT_BACKGROUND = SOURCE_PATH + "pics/";
     /**
      * 图书目录
      */
@@ -140,7 +144,7 @@ public class SFileUtils {
      * @return
      */
     public static String getVideoDirectory() {
-        String path = SOURCE_PATH + ".video/";
+        String path = SOURCE_PATH + "video/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -240,6 +244,10 @@ public class SFileUtils {
 
     /**
      * 将Assets里的文件拷贝到SD卡
+<<<<<<< HEAD
+     *
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
      * @param context
      * @param fileNameFromAssets
      * @param outputFileName
@@ -277,4 +285,177 @@ public class SFileUtils {
         return false;
     }
 
+<<<<<<< HEAD
+    /**
+     * copy file
+     *
+     * @param sourceFilePath
+     * @param destFilePath
+     * @return
+     * @throws RuntimeException if an error occurs while operator
+     *                          FileOutputStream
+     */
+    public static boolean copyFile(String sourceFilePath, String destFilePath) {
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(sourceFilePath);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("FileNotFoundException occurred. ", e);
+        }
+        return writeFile(destFilePath, inputStream);
+    }
+
+    /**
+     * write file, the bytes will be written to the begin of the file
+     *
+     * @param filePath
+     * @param stream
+     * @return
+     * @see {@link #writeFile(String, InputStream, boolean)}
+     */
+    public static boolean writeFile(String filePath, InputStream stream) {
+        return writeFile(filePath, stream, false);
+    }
+
+    /**
+     * write file
+     *
+     * @param stream the input stream
+     * @param append if <code>true</code>, then bytes will be written to the end
+     *               of the file rather than the beginning
+     * @return return true
+     * @throws RuntimeException if an error occurs while operator
+     *                          FileOutputStream
+     */
+    public static boolean writeFile(String filePath, InputStream stream, boolean append) {
+        return writeFile(filePath != null ? new File(filePath) : null, stream, append);
+    }
+
+    /**
+     * write file, the bytes will be written to the begin of the file
+     *
+     * @param file
+     * @param stream
+     * @return
+     * @see {@link #writeFile(File, InputStream, boolean)}
+     */
+    public static boolean writeFile(File file, InputStream stream) {
+        return writeFile(file, stream, false);
+    }
+
+    /**
+     * write file
+     *
+     * @param file   the file to be opened for writing.
+     * @param stream the input stream
+     * @param append if <code>true</code>, then bytes will be written to the end
+     *               of the file rather than the beginning
+     * @return return true
+     * @throws RuntimeException if an error occurs while operator
+     *                          FileOutputStream
+     */
+    public static boolean writeFile(File file, InputStream stream, boolean append) {
+        OutputStream o = null;
+        try {
+            makeDirs(file.getAbsolutePath());
+            o = new FileOutputStream(file, append);
+            byte data[] = new byte[1024];
+            int length = -1;
+            while ((length = stream.read(data)) != -1) {
+                o.write(data, 0, length);
+            }
+            o.flush();
+            return true;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("FileNotFoundException occurred. ", e);
+        } catch (IOException e) {
+            throw new RuntimeException("IOException occurred. ", e);
+        } finally {
+            if (o != null) {
+                try {
+                    o.close();
+                    stream.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("IOException occurred. ", e);
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates the directory named by the trailing filename of this file,
+     * including the complete directory path required to create this directory. <br/>
+     * <br/>
+     * <ul>
+     * <strong>Attentions:</strong>
+     * <li>makeDirs("C:\\Users\\Trinea") can only create users folder</li>
+     * <li>makeFolder("C:\\Users\\Trinea\\") can create Trinea folder</li>
+     * </ul>
+     *
+     * @param filePath
+     * @return true if the necessary directories have been created or the target
+     * directory already exists, false one of the directories can not be
+     * created.
+     */
+    public static boolean makeDirs(String filePath) {
+        String folderName = getFolderName(filePath);
+        if (isEmpty(folderName)) {
+            return false;
+        }
+
+        File folder = new File(folderName);
+        return (folder.exists() && folder.isDirectory()) ? true : folder.mkdirs();
+    }
+
+    /**
+     * get folder name from path
+     * <p>
+     * <pre>
+     *      getFolderName(null)               =   null
+     *      getFolderName("")                 =   ""
+     *      getFolderName("   ")              =   ""
+     *      getFolderName("a.mp3")            =   ""
+     *      getFolderName("a.b.rmvb")         =   ""
+     *      getFolderName("abc")              =   ""
+     *      getFolderName("c:\\")              =   "c:"
+     *      getFolderName("c:\\a")             =   "c:"
+     *      getFolderName("c:\\a.b")           =   "c:"
+     *      getFolderName("c:a.txt\\a")        =   "c:a.txt"
+     *      getFolderName("c:a\\b\\c\\d.txt")    =   "c:a\\b\\c"
+     *      getFolderName("/home/admin")      =   "/home"
+     *      getFolderName("/home/admin/a.txt/b.mp3")  =   "/home/admin/a.txt"
+     * </pre>
+     *
+     * @param filePath
+     * @return
+     */
+    public static String getFolderName(String filePath) {
+
+        if (isEmpty(filePath)) {
+            return filePath;
+        }
+
+        int filePosi = filePath.lastIndexOf(File.separator);
+        return (filePosi == -1) ? "" : filePath.substring(0, filePosi);
+    }
+
+    /**
+     * is null or its length is 0
+     * <p>
+     * <pre>
+     * isEmpty(null) = true;
+     * isEmpty(&quot;&quot;) = true;
+     * isEmpty(&quot;  &quot;) = false;
+     * </pre>
+     *
+     * @param str
+     * @return if string is null or its size is 0, return true, else return
+     * false.
+     */
+    public static boolean isEmpty(String str) {
+        return (str == null || str.length() == 0);
+    }
+
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 }

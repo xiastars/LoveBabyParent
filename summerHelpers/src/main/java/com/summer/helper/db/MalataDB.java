@@ -15,7 +15,7 @@ public class MalataDB extends SQLiteOpenHelper {
 	/** 数据库名称 */
 	private static String DB = "huoxingquandb";
 	/** 版本号 */
-	private final static int VERSIONCODE = 2;
+	private final static int VERSIONCODE = 3;
 
 	public MalataDB(Context context) {
 		super(context, DB, null, VERSIONCODE);
@@ -37,6 +37,7 @@ public class MalataDB extends SQLiteOpenHelper {
 				+ "cacheData blob,"
 				+ "type integer,"
 				+ "count integer,"
+				+ "content text,"
 				+ "key text,"
 				+ "next integer,"
 				+ "createTime integer)";

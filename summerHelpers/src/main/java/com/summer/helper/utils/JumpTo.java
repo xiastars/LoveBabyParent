@@ -23,6 +23,7 @@ public class JumpTo {
     public static String TYPE_OBJECT = "key";
     public static String TYPE_STRING = "tag_string";
     public static String TYPE_STRING2 = "tag_string2";
+    public static String TYPE_BOOLEAN = "tag_boolean";
 
     public static synchronized JumpTo getInstance() {
         if (jumpTo == null) {
@@ -54,7 +55,7 @@ public class JumpTo {
      * @param intent
      * @param activity
      */
-    private void startActivity(Intent intent, Activity activity) {
+    public void startActivity(Intent intent, Activity activity) {
         //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity);
         //ActivityCompat.startActivity(activity, intent, options.toBundle());
         activity.startActivity(intent);
@@ -216,6 +217,19 @@ public class JumpTo {
     public void commonJump(Context context, Class<?> cls, String tag, Object object) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(TYPE_STRING, tag);
+        intent.putExtra(TYPE_OBJECT, (Serializable) object);
+        startActivity(intent, (Activity) context);
+    }
+
+    /**
+     * int 类型 + Object类型
+     *
+     * @param context
+     * @param cls
+     */
+    public void commonJump(Context context, Class<?> cls, Object object,int intTag) {
+        Intent intent = new Intent(context, cls);
+        intent.putExtra(TYPE_INT, intTag);
         intent.putExtra(TYPE_OBJECT, (Serializable) object);
         startActivity(intent, (Activity) context);
     }

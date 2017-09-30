@@ -1,17 +1,15 @@
 package com.summer.parent;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.summer.helper.utils.JumpTo;
 import com.summer.parent.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by xiastars on 2017/9/5.
@@ -23,14 +21,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     TextView register_text;
     @BindView(R.id.forget_pass)
     TextView forget_pass;
-    @BindView(R.id.login_cancel)
-    ImageView login_cancel;
     @BindView(R.id.login_user_name)
     EditText loginUserName;
     @BindView(R.id.login_user_psw)
     EditText loginUserPsw;
     @BindView(R.id.login_double)
-    Button login_double;
+    TextView login_double;
 
     @Override
     protected void dealDatas(int requestCode, Object obj) {
@@ -49,21 +45,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initData() {
+        register_text.setOnClickListener(this);
         removeTitle();
-        setLayoutFullscreen();
     }
 
+    @OnClick({R.id.register_text})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_text:
-                //startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), IntentCode.RequestCode.TOREGISTER);
+                JumpTo.getInstance().commonJump(context,RegisterActivity.class);
+               // startActivityForResult(new Intent(LoginActivity.this, .class), IntentCode.RequestCode.TOREGISTER);
                 break;
             case R.id.forget_pass:
                 //Skip(RetrieveActivity.class);
-                break;
-            case R.id.login_cancel:
-                finish();
                 break;
         }
     }

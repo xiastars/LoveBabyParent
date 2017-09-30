@@ -155,6 +155,22 @@ public class SummerParameter {
     }
 
     /**
+<<<<<<< HEAD
+     * 安全获取某一个参数
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public Object getParamSecurity(String key,Object defaultValue) {
+        if (mParams.containsKey(key)) {
+            return  mParams.get(key);
+        }
+        return defaultValue;
+    }
+
+    /**
+=======
+>>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
      * 设置虚拟数据，在网络差时使用
      */
     public void setShowVirtualData() {

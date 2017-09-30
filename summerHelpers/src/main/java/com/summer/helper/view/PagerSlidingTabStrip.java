@@ -313,11 +313,16 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
                 : defaultTabLayoutParams);
     }
 
-    public void setTabWithAndHeight(int width, int height) {
-        defaultTabLayoutParams.width = width;
-        defaultTabLayoutParams.height = height;
-        defaultTabLayoutParams.leftMargin = SUtils.getDip(context,20);
-        defaultTabLayoutParams.rightMargin = SUtils.getDip(context,20);
+    public void setTabWithAndHeight(int width, int height, int margin) {
+        defaultTabLayoutParams.width = SUtils.getDip(context, width);
+        defaultTabLayoutParams.height = SUtils.getDip(context, height);
+        defaultTabLayoutParams.leftMargin = SUtils.getDip(context, margin);
+        defaultTabLayoutParams.rightMargin = SUtils.getDip(context, margin);
+        expandedTabLayoutParams.width = SUtils.getDip(context, width);
+        ;
+        expandedTabLayoutParams.height = SUtils.getDip(context, height);
+        expandedTabLayoutParams.leftMargin = SUtils.getDip(context, margin);
+        expandedTabLayoutParams.rightMargin = SUtils.getDip(context, margin);
     }
 
     private void updateTabStyles() {
@@ -355,6 +360,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             return;
         }
 
+        View view = tabsContainer.getChildAt(position);
+        if(view == null){
+            return;
+        }
         int newScrollX = tabsContainer.getChildAt(position).getLeft() + offset;
 
         if (position > 0 || offset > 0) {
@@ -442,6 +451,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         @Override
         public void onPageScrolled(int position, float positionOffset,
                                    int positionOffsetPixels) {
+            if(tabsContainer == null || tabsContainer.getChildAt(position)== null){
+                return;
+            }
 
             currentPosition = position;
             currentPositionOffset = positionOffset;

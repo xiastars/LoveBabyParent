@@ -3,6 +3,9 @@ package com.summer.helper.recycle;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.summer.helper.R;
 
 import java.util.List;
 
@@ -37,6 +40,24 @@ public class SRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void notifyDataChanged(List<?> comments) {
         this.items = comments;
         notifyDataSetChanged();
+    }
+
+    /**
+     * 返回对应颜色
+     * @param colorRes
+     * @return
+     */
+    public int getResourceColor(int colorRes){
+        return context.getResources().getColor(colorRes);
+    }
+
+    /**
+     * 为文本设置颜色
+     * @param colorRes
+     * @return
+     */
+    protected void setHoderTextColor(TextView view, int colorRes){
+        view.setTextColor(getResourceColor(colorRes));
     }
 
     public int getItemCount() {
