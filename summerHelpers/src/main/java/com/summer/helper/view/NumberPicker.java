@@ -18,10 +18,6 @@
 
 package com.summer.helper.view;
 
-import java.util.ArrayList;
-
-import com.summer.helper.R;
-
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -50,6 +46,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.summer.helper.R;
+
+import java.util.ArrayList;
 
 /**
  * A widget that enables the user to select a number form a predefined range.
@@ -148,7 +148,7 @@ public class NumberPicker extends LinearLayout {
 	 * 
 	 * @hide
 	 */
-	public static final Formatter TWO_DIGIT_FORMATTER = new Formatter() {
+	public static final NumberPicker.Formatter TWO_DIGIT_FORMATTER = new NumberPicker.Formatter() {
 		final StringBuilder mBuilder = new StringBuilder();
 
 		final java.util.Formatter mFmt = new java.util.Formatter(mBuilder,
@@ -1355,7 +1355,7 @@ public class NumberPicker extends LinearLayout {
 
 	@Override
 	public void addFocusables(ArrayList<View> views, int direction,
-			int focusableMode) {
+                              int focusableMode) {
 		// We do not want the real descendant to be considered focus search
 		// since it is managed by the accessibility node provider.
 		// if ((focusableMode & FOCUSABLES_ACCESSIBILITY) ==
@@ -1804,7 +1804,7 @@ public class NumberPicker extends LinearLayout {
 
 		@Override
 		public CharSequence filter(CharSequence source, int start, int end,
-				Spanned dest, int dstart, int dend) {
+                                   Spanned dest, int dstart, int dend) {
 			if (mDisplayedValues == null) {
 				CharSequence filtered = super.filter(source, start, end, dest,
 						dstart, dend);

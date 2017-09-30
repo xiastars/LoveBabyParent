@@ -16,14 +16,12 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Environment;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.support.annotation.RequiresApi;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -63,14 +61,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ref.SoftReference;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -364,7 +360,6 @@ public class SUtils {
 
     /**
      * 获取一个View的左外边距
-<<<<<<< HEAD
      *
      * @param view
      * @return
@@ -385,27 +380,6 @@ public class SUtils {
             } else if (parent instanceof FrameLayout) {
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
                 if (params != null) {
-=======
-     * @param view
-     * @return
-     */
-    public static int getViewLeMargin(View view){
-        ViewGroup parent = (ViewGroup) view.getParent();
-        if(parent != null){
-            if(parent instanceof RelativeLayout){
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
-                if(params != null){
-                    return params.leftMargin;
-                }
-            }else if(parent instanceof LinearLayout){
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-                if(params != null){
-                    return params.leftMargin;
-                }
-            }else if(parent instanceof FrameLayout){
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-                if(params != null){
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                     return params.leftMargin;
                 }
             }
@@ -528,11 +502,11 @@ public class SUtils {
             return "";
         String htmlStr = inputString; // 含html标签的字符串
         String textStr = "";
-        Pattern p_script;
+        java.util.regex.Pattern p_script;
         java.util.regex.Matcher m_script;
-        Pattern p_style;
+        java.util.regex.Pattern p_style;
         java.util.regex.Matcher m_style;
-        Pattern p_html;
+        java.util.regex.Pattern p_html;
         java.util.regex.Matcher m_html;
         try {
             String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // 定义script的正则表达式{或<script[^>]*?>[\\s\\S]*?<\\/script>
@@ -644,11 +618,7 @@ public class SUtils {
      * @return
      */
     public static String getDayWithFormat(String formatContent, long date) {
-<<<<<<< HEAD
         return getDayWithFormat(formatContent, new Date(date));
-=======
-        return getDayWithFormat(formatContent,new Date(date));
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
     }
 
     /**
@@ -858,10 +828,10 @@ public class SUtils {
     public static String getSDPath() {
         File sdDir = null;
         try {
-            boolean sdCardExist = Environment.getExternalStorageState()
-                    .equals(Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
+            boolean sdCardExist = android.os.Environment.getExternalStorageState()
+                    .equals(android.os.Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
             if (sdCardExist) {
-                sdDir = Environment.getExternalStorageDirectory();// 获取跟目录
+                sdDir = android.os.Environment.getExternalStorageDirectory();// 获取跟目录
             } else {
                 File file = new File(Environment.getDataDirectory() + "/sdcard");
                 if (file.canRead()) {
@@ -1609,11 +1579,7 @@ public class SUtils {
                 if (holder == 0) {
                     view.setImageResource(R.drawable.so_greye1_pure);
                 } else {
-<<<<<<< HEAD
                     BitmapUtils.getInstance().checkContainBitmaps(view, context.getClass().getSimpleName(), holder);
-=======
-                    BitmapUtils.getInstance().checkContainBitmaps(view,context.getClass().getSimpleName(),holder);
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                 }
             } catch (OutOfMemoryError e) {
                 e.printStackTrace();
@@ -1627,7 +1593,7 @@ public class SUtils {
     }
 
     public static Bitmap decodeBackgoundBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
-        final Options options = new Options();
+        final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(res, resId, options);
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
@@ -1635,7 +1601,7 @@ public class SUtils {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static int calculateInSampleSize(Options options, int reqWidth, int reqHeight) {
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int width = options.outWidth;
         final int height = options.outHeight;
         int inSampleSize = 1;

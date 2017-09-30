@@ -52,7 +52,7 @@ public class DatePicker extends FrameLayout {
 
 			@Override
 			public void onValueChange(NumberPicker picker, int oldVal,
-					int newVal) {
+                                      int newVal) {
 				mCalendar.set(Calendar.MONTH, newVal);
 				updateDate();
 				
@@ -62,7 +62,7 @@ public class DatePicker extends FrameLayout {
 
 			@Override
 			public void onValueChange(NumberPicker picker, int oldVal,
-					int newVal) {
+                                      int newVal) {
 
 				mCalendar.set(Calendar.DATE, newVal);
 				updateDate();
@@ -72,7 +72,7 @@ public class DatePicker extends FrameLayout {
 
 			@Override
 			public void onValueChange(NumberPicker picker, int oldVal,
-					int newVal) {
+                                      int newVal) {
 				mCalendar.set(Calendar.YEAR, newVal);
 				updateDate();
 

@@ -51,6 +51,7 @@ public class SRecycleView extends MaterialRefreshLayout {
 	public SRecycleView(Context context) {
 		super(context);
 
+
 	}
 
 	public SRecycleView(Context context, AttributeSet attri) {

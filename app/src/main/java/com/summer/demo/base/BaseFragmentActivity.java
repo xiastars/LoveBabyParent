@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.summer.demo.R;
 import com.summer.helper.listener.OnShareListener;
 import com.summer.helper.server.SummerParameter;
 import com.summer.helper.utils.BitmapUtils;
@@ -24,6 +23,7 @@ import com.summer.helper.utils.Logs;
 import com.summer.helper.utils.ReceiverUtils;
 import com.summer.helper.utils.SUtils;
 import com.summer.helper.view.resize.RRelativeLayout;
+import com.summer.parent.R;
 
 import java.lang.ref.WeakReference;
 

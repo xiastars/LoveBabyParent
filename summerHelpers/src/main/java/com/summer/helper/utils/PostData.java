@@ -3,11 +3,6 @@ package com.summer.helper.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-<<<<<<< HEAD
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-=======
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -27,13 +22,13 @@ import java.io.LineNumberReader;
 public class PostData {
 
     // 手机品牌
-    public static String MANUFACTURER = Build.MANUFACTURER;
+    public static String MANUFACTURER = android.os.Build.MANUFACTURER;
     // 手机型号
-    public static String MODEL = Build.MODEL;
+    public static String MODEL = android.os.Build.MODEL;
     // 操作系统
     public static String OS = "Android";
     // 操作系统版本号
-    public static String VERSION_OS = Build.VERSION.SDK;
+    public static String VERSION_OS = android.os.Build.VERSION.SDK;
     // 手机唯一标识码
     public static String IMEI = "";
     // 项目版本号：
@@ -87,13 +82,8 @@ public class PostData {
         params.put("os", OS + "_" + VERSION_OS);
         params.put("language", "cn");
         params.put("channel", CHANNEL);
-<<<<<<< HEAD
         if (!TextUtils.isEmpty(USER_URL)) {
             params.put("userUrl", USER_URL);
-=======
-        if(!TextUtils.isEmpty(USER_URL)){
-            params.put("userUrl",USER_URL);
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
             USER_URL = null;
         }
         if (MAC_INFO == null) {

@@ -28,11 +28,7 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
     boolean bottomVisible = false;
     protected boolean showEmptyView;
 
-<<<<<<< HEAD
     protected ViewGroup headerView;
-=======
-    ViewGroup headerView;
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 
     /**
      * 正在刷新中
@@ -82,11 +78,7 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
             boolean showBottom = getRealItemCount() == 0 && showEmptyView;
             if (bottomVisible) {
                 rlView.setVisibility(View.VISIBLE);
-<<<<<<< HEAD
                 params.height = showBottom ? SUtils.getDip(context, 300) : SUtils.getDip(context, 50);
-=======
-                params.height = showBottom ? SUtils.getDip(context, 300) : SUtils.getDip(context, 42);
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                 params.width = SUtils.screenWidth;
                 if(showBottom){
                     ((BottomHolder) holder).llEmpty.setVisibility(View.VISIBLE);
@@ -171,10 +163,6 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
         return items != null ? items.size() : 0;
     }
 
-    public int getRealItemCount() {
-        return items != null ? items.size() : 0;
-    }
-
     public int getItemCount() {
         return items != null ? items.size() + bottomCount + headerCount : bottomCount;
     }
@@ -211,10 +199,7 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
             return;
         }
         isAdapterRefresh = true;
-<<<<<<< HEAD
-=======
         Logs.i("xia", "没有更多了");
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         try {
             notifyItemChanged(getItemCount() - 1);
         } catch (ConcurrentModificationException e) {
@@ -231,7 +216,6 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
         this.showEmptyView = true;
     }
 
-<<<<<<< HEAD
     public boolean isBottomVisible() {
         return bottomVisible;
     }
@@ -240,8 +224,6 @@ public abstract class SRecycleMoreAdapter extends RecyclerView.Adapter<RecyclerV
         this.bottomVisible = bottomVisible;
     }
 
-=======
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
     public void setBottomViewGONE() {
         Logs.i("没有更多了");
         bottomVisible = false;

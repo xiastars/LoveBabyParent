@@ -21,8 +21,6 @@ import android.util.Log;
 import android.widget.ImageView.ScaleType;
 
 import com.summer.helper.utils.BitmapUtils;
-import com.summer.helper.utils.Logs;
-import com.summer.helper.utils.SUtils;
 
 import java.lang.ref.SoftReference;
 
@@ -106,7 +104,7 @@ public class RoundedDrawable extends Drawable {
         return drawable;
     }
 
-    public static  Bitmap drawableToBitmap(Drawable drawable, Context context) {
+    public static Bitmap drawableToBitmap(Drawable drawable, Context context) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
@@ -124,7 +122,7 @@ public class RoundedDrawable extends Drawable {
         return null;
     }
 
-    private static Bitmap setPic(int width,int height,Drawable drawable,Context context){
+    private static Bitmap setPic(int width, int height, Drawable drawable, Context context){
         SoftReference<Bitmap> bitmap = new SoftReference<>(Bitmap.createBitmap(width, height, Config.ARGB_8888));
         Bitmap b = bitmap.get();
         BitmapUtils.getInstance().addBitmap(b, context.getClass().getSimpleName());

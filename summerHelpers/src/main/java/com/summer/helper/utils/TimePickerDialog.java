@@ -1,19 +1,19 @@
 package com.summer.helper.utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
-import com.summer.helper.R;
-import com.summer.helper.view.DatePicker;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
+import com.summer.helper.R;
+import com.summer.helper.view.DatePicker;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class TimePickerDialog {
 	Context context;
@@ -38,9 +38,9 @@ public class TimePickerDialog {
 	 * 显示时间选择器
 	 */
 	public void show(final OnTimePickerListener listener){
-		final Dialog mDialog = new Dialog(context,R.style.AiTheme);
+		final Dialog mDialog = new Dialog(context, R.style.AiTheme);
 		mDialog.show();
-		mDialog.setContentView(R.layout.dialog_timepicker);	
+		mDialog.setContentView(R.layout.dialog_timepicker);
 		final DatePicker datePicker = (DatePicker) mDialog.findViewById(R.id.datePicker);
 		final TextView timeView = (TextView) mDialog.findViewById(R.id.tv_time);
 		/*
@@ -48,14 +48,14 @@ public class TimePickerDialog {
 		 */
 		if(!TextUtils.isEmpty(disireContent)){
 			Calendar c = Calendar.getInstance();
-			c.set(Calendar.YEAR,Integer.parseInt(disireContent.substring(0,4)));
+			c.set(Calendar.YEAR, Integer.parseInt(disireContent.substring(0,4)));
 			c.set(Calendar.MONTH, Integer.parseInt(disireContent.substring(5,7))-1);
 			c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(disireContent.substring(8,10)));
 			String time = SUtils.getDays(c.getTime());
 			timeView.setText(time);
 			datePicker.setCalendar(c);
 		}else{
-			timeView.setText(SUtils.getDays(new Date()));	
+			timeView.setText(SUtils.getDays(new Date()));
 		}
 
 		datePicker.receiveListener(new DatePicker.OnDateChangedListener() {
@@ -96,7 +96,7 @@ public class TimePickerDialog {
 	 * @return
 	 */
 	private String getCDays(Date date){
-		SimpleDateFormat format = new SimpleDateFormat(formatContent,Locale.CHINA);
+		SimpleDateFormat format = new SimpleDateFormat(formatContent, Locale.CHINA);
 		String s = format.format(date);
 		return s;
 	}

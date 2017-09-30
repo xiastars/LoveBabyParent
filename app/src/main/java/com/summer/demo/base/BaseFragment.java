@@ -17,6 +17,7 @@ import com.summer.helper.recycle.ScollViewRefreshLayout;
 import com.summer.helper.server.SummerParameter;
 import com.summer.helper.view.NRecycleView;
 import com.summer.helper.view.SRecycleView;
+import com.summer.parent.base.BaseResp;
 
 import java.lang.ref.WeakReference;
 

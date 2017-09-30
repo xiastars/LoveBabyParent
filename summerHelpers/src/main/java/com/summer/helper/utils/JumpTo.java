@@ -171,7 +171,7 @@ public class JumpTo {
      * @param cls
      * @param tag
      */
-    public void commonJump(Context context, Class<?> cls, String tag,int inttag) {
+    public void commonJump(Context context, Class<?> cls, String tag, int inttag) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(TYPE_STRING, tag);
         intent.putExtra(TYPE_INT, inttag);
@@ -185,7 +185,7 @@ public class JumpTo {
      * @param cls
      * @param tag
      */
-    public void commonJump(Context context, Class<?> cls, String tag,int inttag,String tag2) {
+    public void commonJump(Context context, Class<?> cls, String tag, int inttag, String tag2) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(TYPE_STRING, tag);
         intent.putExtra(TYPE_STRING2, tag2);
@@ -227,7 +227,7 @@ public class JumpTo {
      * @param context
      * @param cls
      */
-    public void commonJump(Context context, Class<?> cls, Object object,int intTag) {
+    public void commonJump(Context context, Class<?> cls, Object object, int intTag) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(TYPE_INT, intTag);
         intent.putExtra(TYPE_OBJECT, (Serializable) object);

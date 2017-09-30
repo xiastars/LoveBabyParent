@@ -36,7 +36,7 @@ public class PureButton extends Button {
      * @param height
      */
     public void setLayoutWH(int width,int height){
-        this.setLayoutParams(new ViewGroup.LayoutParams(SUtils.getSWidth((Activity) getContext(),width),SUtils.getSHeight((Activity) getContext(),height)));
+        this.setLayoutParams(new ViewGroup.LayoutParams(SUtils.getSWidth((Activity) getContext(),width), SUtils.getSHeight((Activity) getContext(),height)));
     }
 
     @Override

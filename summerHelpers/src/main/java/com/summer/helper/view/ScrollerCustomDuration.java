@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-public class ScrollerCustomDuration extends Scroller{
+public class ScrollerCustomDuration extends Scroller {
 	private int mDuration = 500;
 
     public ScrollerCustomDuration(Context context) {

@@ -15,7 +15,7 @@ public class PatternUtils {
 		System.out.print(result);
 		
 	}
-	public static boolean stringStartWith(String content,String prefix ){
+	public static boolean stringStartWith(String content, String prefix ){
 		return content.matches(prefix);
 	}
 
@@ -27,7 +27,7 @@ public class PatternUtils {
 	 * @param replaceContent
 	 * @return
 	 */
-	public static String  replaceWithHeadAndBottom(String content,String headContent,String bottomContent,String replaceContent){
+	public static String replaceWithHeadAndBottom(String content, String headContent, String bottomContent, String replaceContent){
 		Pattern r = Pattern.compile(headContent+".*?"+bottomContent);
         Matcher m = r.matcher(content);
         return content = m.replaceAll(replaceContent);

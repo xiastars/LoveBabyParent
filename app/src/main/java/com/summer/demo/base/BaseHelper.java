@@ -12,21 +12,22 @@ import android.widget.RelativeLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.summer.demo.MyApplication;
-import com.summer.demo.R;
-import com.summer.helper.server.ServerFileUtils;
 import com.summer.helper.db.CommonService;
 import com.summer.helper.db.DBType;
 import com.summer.helper.recycle.MaterialRefreshLayout;
 import com.summer.helper.recycle.SRecycleMoreAdapter;
 import com.summer.helper.server.EasyHttp;
 import com.summer.helper.server.RequestCallback;
+import com.summer.helper.server.ServerFileUtils;
 import com.summer.helper.server.SummerParameter;
 import com.summer.helper.utils.Logs;
 import com.summer.helper.utils.SThread;
 import com.summer.helper.utils.SUtils;
 import com.summer.helper.view.LoadingDialog;
 import com.summer.helper.view.NRecycleView;
+import com.summer.parent.MyApplication;
+import com.summer.parent.R;
+import com.summer.parent.base.BaseResp;
 
 import java.util.List;
 

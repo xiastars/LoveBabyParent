@@ -1,10 +1,5 @@
 package com.summer.helper.view;
 
-import com.summer.helper.R;
-import com.summer.helper.utils.BitmapUtils;
-import com.summer.helper.utils.Logs;
-import com.summer.helper.utils.SUtils;
-
 import android.animation.ArgbEvaluator;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,9 +7,6 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -24,7 +16,9 @@ import android.util.Log;
 import android.util.Property;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
+
+import com.summer.helper.R;
+import com.summer.helper.utils.SUtils;
 
 public class RoundAngleImageView extends AppCompatImageView {
 	public static final String TAG = "RoundedImageView";
@@ -135,7 +129,7 @@ public class RoundAngleImageView extends AppCompatImageView {
 	 * Return the current scale type in use by this ImageView.
 	 * 
 	 * @attr ref android.R.styleable#ImageView_scaleType
-	 * @see ScaleType
+	 * @see android.widget.ImageView.ScaleType
 	 */
 	@Override
 	public ScaleType getScaleType() {

@@ -1,6 +1,5 @@
 package com.summer.demo.base;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
@@ -18,19 +17,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.summer.demo.R;
-import com.summer.demo.server.CUtils;
-import com.summer.demo.server.CodeRespondUtils;
 import com.summer.helper.listener.OnShareListener;
 import com.summer.helper.server.SummerParameter;
 import com.summer.helper.utils.BitmapUtils;
 import com.summer.helper.utils.Logs;
 import com.summer.helper.utils.SUtils;
-import com.summer.helper.view.resize.RLinearLayout;
 import com.summer.helper.view.resize.RRelativeLayout;
+import com.summer.parent.R;
+import com.summer.parent.base.BaseResp;
+import com.summer.parent.server.CUtils;
+import com.summer.parent.server.CodeRespondUtils;
 
 import java.lang.ref.WeakReference;
-import java.util.NoSuchElementException;
 
 /**
  * Created by xiaqiliang on 2017/3/24.

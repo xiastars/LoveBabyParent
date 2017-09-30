@@ -32,7 +32,7 @@ public class SThread {
 	/**
 	 * Activity的请求会转到主线程操作
 	 */
-	public void runOnUIThreadIfNeed(Context context,Runnable runnable){
+	public void runOnUIThreadIfNeed(Context context, Runnable runnable){
 		if(context instanceof Activity){
 			Activity activity=(Activity)context;
 			activity.runOnUiThread(runnable);

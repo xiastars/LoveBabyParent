@@ -14,7 +14,7 @@ public class Logs {
 
 		if (!isDebug)
 			return;
-		StackTraceElement stackTrace = Thread.currentThread()
+		StackTraceElement stackTrace = java.lang.Thread.currentThread()
 				.getStackTrace()[3];
 		String fileInfo = "at "+stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "
@@ -25,7 +25,7 @@ public class Logs {
 	public static void i(String tag, String msg) {
 		if (!isDebug)
 			return;
-		StackTraceElement stackTrace = Thread.currentThread()
+		StackTraceElement stackTrace = java.lang.Thread.currentThread()
 				.getStackTrace()[3];
 		String fileInfo = "at "+stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "
@@ -36,7 +36,7 @@ public class Logs {
 	public static void e(String tag, String msg) {
 		if (!isDebug)
 			return;
-		StackTraceElement stackTrace = Thread.currentThread()
+		StackTraceElement stackTrace = java.lang.Thread.currentThread()
 				.getStackTrace()[3];
 		String fileInfo = "at "+ stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "
@@ -47,7 +47,7 @@ public class Logs {
 	public static void w(String tag, String msg) {
 		if (!isDebug)
 			return;
-		StackTraceElement stackTrace = Thread.currentThread()
+		StackTraceElement stackTrace = java.lang.Thread.currentThread()
 				.getStackTrace()[3];
 		String fileInfo = "at "+stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "
@@ -58,7 +58,7 @@ public class Logs {
 	public static void v(String tag, String msg) {
 		if (!isDebug)
 			return;
-		StackTraceElement stackTrace = Thread.currentThread()
+		StackTraceElement stackTrace = java.lang.Thread.currentThread()
 				.getStackTrace()[3];
 		String fileInfo ="at "+ stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "
@@ -67,7 +67,7 @@ public class Logs {
 	}
 
 	public static String getStackTraceMsg() {
-		StackTraceElement stackTrace = Thread.currentThread()
+		StackTraceElement stackTrace = java.lang.Thread.currentThread()
 				.getStackTrace()[3];
 		String fileInfo = "at "+stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "
@@ -78,7 +78,7 @@ public class Logs {
 	public static void i(String msg) {
 		if (!isDebug)
 			return;
-		StackTraceElement stackTrace = Thread.currentThread()
+		StackTraceElement stackTrace = java.lang.Thread.currentThread()
 				.getStackTrace()[3];
 		String fileInfo = "at "+stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "
@@ -89,11 +89,7 @@ public class Logs {
 	public static void t(long time,String content) {
 		if (!isDebug)
 			return;
-<<<<<<< HEAD
-		StackTraceElement stackTrace = Thread.currentThread()
-=======
 		StackTraceElement stackTrace = java.lang.Thread.currentThread()
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 				.getStackTrace()[3];
 		String fileInfo = "at "+stackTrace.getFileName() + "("
 				+ stackTrace.getLineNumber() + ") "

@@ -2,22 +2,14 @@ package com.summer.helper.utils;
 
 import android.content.Context;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-<<<<<<< HEAD
 import java.io.OutputStream;
-=======
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 
 /**
  * 处理数据相关
@@ -244,10 +236,7 @@ public class SFileUtils {
 
     /**
      * 将Assets里的文件拷贝到SD卡
-<<<<<<< HEAD
      *
-=======
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
      * @param context
      * @param fileNameFromAssets
      * @param outputFileName
@@ -285,7 +274,6 @@ public class SFileUtils {
         return false;
     }
 
-<<<<<<< HEAD
     /**
      * copy file
      *
@@ -456,6 +444,4 @@ public class SFileUtils {
         return (str == null || str.length() == 0);
     }
 
-=======
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 }

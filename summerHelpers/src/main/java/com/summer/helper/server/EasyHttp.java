@@ -74,16 +74,6 @@ public final class EasyHttp {
         }
     }
 
-    public static void init(){
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                .writeTimeout(10000L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(false)
-                .build();
-        //其他配置
-        OkHttpUtils.getInstance(okHttpClient);
-    }
-
     /**
      * POST请求，数据注入到类里
      *
@@ -157,18 +147,13 @@ public final class EasyHttp {
                 SummerParameter pa = PostData.getLoginParameters(context);
                 Set<String> postdate = pa.keySet();
                 for (String postKey : postdate) {
-<<<<<<< HEAD
 
                     if (!TextUtils.isEmpty(postKey)) {
-                        String value = pa.get(postKey) + "";
-                        if (STextUtils.isChineseStr(value)) {
+                        String value =  pa.get(postKey)+"";
+                        if(STextUtils.isChineseStr(value)){
                             value = STextUtils.getPinYin(value);
                         }
-                        formBody.addHeader(postKey, value + "");
-=======
-                    if(!TextUtils.isEmpty(postKey)){
-                        formBody.addHeader(postKey, pa.get(postKey) + "");
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
+                        formBody.addHeader(postKey,value + "");
                     }
                 }
             } else {
@@ -186,11 +171,7 @@ public final class EasyHttp {
             parameters.encodeUrlAndLog(url);
         }
         formBody.post(requestBody.build()).header("Content-Type", "application/x-www-form-urlencoded")
-<<<<<<< HEAD
                 .header("User-Agent", PostData.getUserAgent());
-=======
-                .header("User-Agent",PostData.getUserAgent());
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         final String finalLogInfo = logInfo;
         try {
             okHttpClient.newCall(formBody.build()).enqueue(new Callback() {
@@ -204,11 +185,7 @@ public final class EasyHttp {
                     }
                     final String response = body.string();
 
-<<<<<<< HEAD
                     SThread.getIntances().runOnUIThreadIfNeed(context, new Runnable() {
-=======
-                    SThread.getIntances().runOnUIThreadIfNeed(context,new Runnable() {
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                         @Override
                         public void run() {
                             try {
@@ -225,7 +202,7 @@ public final class EasyHttp {
                                     callBack.done(t);
                                 }
                             } catch (Exception e) {
-                                Logs.i("e:::" + e.toString());
+                                Logs.i("e:::"+e.toString());
                                 if (callBack != null) {
                                     callBack.onError(ErrorCode.INVALID_JSON, "无效的数据格式");
                                 }
@@ -237,13 +214,8 @@ public final class EasyHttp {
                 }
 
                 @Override
-<<<<<<< HEAD
                 public void onFailure(final Call arg0, final IOException arg1) {
                     SThread.getIntances().runOnUIThreadIfNeed(context, new Runnable() {
-=======
-                public void onFailure(Call arg0, final IOException arg1) {
-                    SThread.getIntances().runOnUIThreadIfNeed(context,new Runnable() {
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
                         @Override
                         public void run() {
                             if (arg1 instanceof SocketTimeoutException) {
@@ -297,11 +269,7 @@ public final class EasyHttp {
             parameters.encodeUrlAndLog(url);
         }
         final String finalLogInfo = logInfo;
-<<<<<<< HEAD
         utils.addHeader("User-Agent", PostData.getUserAgent());
-=======
-        utils.addHeader("User-Agent",PostData.getUserAgent());
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
         utils.build().execute(new StringCallback() {
             @Override
             public void onResponse(String response) {
@@ -339,60 +307,6 @@ public final class EasyHttp {
         });
     }
 
-<<<<<<< HEAD
-=======
-    private static OkHttpClient setCoockies(final Context context) {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .cookieJar(new CookieJar() {
-                    private final PersistentCookieStore cookieStore = new PersistentCookieStore(context);
-
-                    @Override
-                    public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-
-                        if (cookies != null && cookies.size() > 0) {
-
-                            for (int i = 0; i < cookies.size(); i++) {
-                                Cookie cookie = cookies.get(i);
-                                String name = cookie.name();
-                                String value = cookie.value();
-                                if (!TextUtils.isEmpty(name)) {
-                                    if (name.equals("TOKEN")) {
-                                        PostData.TOKEN = value;
-                                        SUtils.saveStringData(context, "TOKEN", PostData.TOKEN);
-                                    }
-                                    if (name.equals("SESSION")) {
-                                        SUtils.saveStringData(context, "SESSION", value);
-                                    }
-                                }
-                            }
-                            List<Cookie> newCookies = new ArrayList<>();
-                            if (!TextUtils.isEmpty(PostData.TOKEN)) {
-                                Cookie.Builder builder = new Cookie.Builder();
-                                builder.name("TOKEN");
-                                builder.value(PostData.TOKEN);
-                                String domain = url.topPrivateDomain();
-                                if (domain != null) {
-                                    builder.domain(url.topPrivateDomain());
-                                }
-                                Cookie cookie = builder.build();
-                                newCookies.add(cookie);
-                            }
-                            newCookies.addAll(cookies);
-                            cookieStore.add(url, newCookies);
-                        }
-                    }
-
-                    @Override
-                    public List<Cookie> loadForRequest(HttpUrl url) {
-                        List<Cookie> cookies = cookieStore.get(url);
-                        return cookies;
-                    }
-                })
-                .build();
-        return okHttpClient;
-    }
-
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
     /**
      * 上传文件
      *

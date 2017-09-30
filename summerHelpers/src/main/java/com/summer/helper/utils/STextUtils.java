@@ -8,23 +8,14 @@ import android.text.style.ForegroundColorSpan;
 import android.widget.EditText;
 import android.widget.TextView;
 
-<<<<<<< HEAD
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 
 import java.security.MessageDigest;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-=======
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 
 /**
  * Created by xiaqiliang on 2017/4/6.
@@ -120,7 +111,7 @@ public class STextUtils {
      * @param args
      * @return
      */
-    public static void setSpliceText(TextView tvConent,String... args){
+    public static void setSpliceText(TextView tvConent, String... args){
         tvConent.setText(spliceText(args));
     }
 
@@ -130,10 +121,9 @@ public class STextUtils {
      * @param name
      * @param showName
      */
-    public static void setHtmlText( TextView showName,String name) {
+    public static void setHtmlText(TextView showName, String name) {
         showName.setText(Html.fromHtml(name), null);
     }
-<<<<<<< HEAD
 
     /**
      * md5加密
@@ -261,6 +251,4 @@ public class STextUtils {
             view.setText("");
         }
     }
-=======
->>>>>>> 7cc00bee69b40f9634b41ccdf27b439a3c4fd3e9
 }

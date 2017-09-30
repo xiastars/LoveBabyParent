@@ -107,15 +107,17 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         mViewpager.setOnPageChangeListener(this);
     }
 
-    @Override public void onPageScrolled(int position, float positionOffset,
-            int positionOffsetPixels) {
+    @Override
+    public void onPageScrolled(int position, float positionOffset,
+                               int positionOffsetPixels) {
         if (mViewPagerOnPageChangeListener != null) {
             mViewPagerOnPageChangeListener.onPageScrolled(position, positionOffset,
                     positionOffsetPixels);
         }
     }
 
-    @Override public void onPageSelected(int position) {
+    @Override
+    public void onPageSelected(int position) {
         if (mViewPagerOnPageChangeListener != null) {
             mViewPagerOnPageChangeListener.onPageSelected(position);
         }
@@ -130,7 +132,8 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         createIndicators(mViewpager);
     }
 
-    @Override public void onPageScrollStateChanged(int state) {
+    @Override
+    public void onPageScrollStateChanged(int state) {
         if (mViewPagerOnPageChangeListener != null) {
             mViewPagerOnPageChangeListener.onPageScrollStateChanged(state);
         }
